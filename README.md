@@ -26,48 +26,32 @@ In this project I create two VMs (Virtual Machines), one running Windows Server,
 
 <p align="center">
 Navigate to Microsoft Azure and create a resource group: <br/>
-<img src="https://i.imgur.com/BcQ414M.png" height="80%" width="80%" alt="Setting Up in Azure"/>
+<img src="https://i.imgur.com/sJElFNR.png" height="80%" width="80%" alt="Setting Up in Azure"/>
 <br />
 <br />
 Next, create a virtual network like so: <br/>
-<img src="https://i.imgur.com/QvTkERb.png" height="80%" width="80%" alt="Setting Up in Azure"/>
+<img src="https://i.imgur.com/zdkn3kG.png" height="80%" width="80%" alt="Setting Up in Azure"/>
 <br />
 <br />
-Once my resource group and network is created, I'll create and set up the virtual machine that will act as our Domain Controller. For the image, make sure you use Windows Server:  <br/>
-<img src="https://i.imgur.com/Xk2DtU0.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
-<img src="https://i.imgur.com/JiVXyJQ.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
-In the Networking tab of this VM, I'll make sure it will create itself on the virtual network I just created. I'll leave all other settings default and create this VM: <br/>
-<img src="https://i.imgur.com/ghqn7TI.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
-Now, I'll create another VM that will serve as the client. The image for this machine should be Windows 10, NOT Windows Server like I did for the previous machine:  <br/>
-<img src="https://i.imgur.com/9hKyxBp.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
-<img src="https://i.imgur.com/EBRXTaM.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
-In the Networking tab of this VM, I'll make sure it will create itself on the same virtual network of the previous machine created. I'll leave all other settings default and create this VM:  <br/>
-<img src="https://i.imgur.com/RYUn5oi.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
+Once my resource group and network is created, I'll create and set up the virtual machine that will act as our Domain Controller. For the image, make sure you use Windows Server. Also make sure the VM is in the same virtual network you created:  <br/>
+<img src="https://i.imgur.com/WAXVbh3.png" height="80%" width="80%" alt="Setting Up in Azure"/>
+
+Now, I'll create another VM that will serve as the client. The image for this machine should be Windows 10, NOT Windows Server like I did for the previous machine. Make sure the client VM is also on the virtual network we created:  <br/>
+<img src="https://i.imgur.com/RA796ew.png" height="80%" width="80%" alt="Setting Up in Azure"/>
+
 I now need to set our DC (Domain Controller) private IP address to "static" as by default it is set to "dynamic". I want this to be static, because this DC will double as a DNS (Domain Name System) server, which I will tell our client to use as a DNS server later. If the IP allocation setting were set to dynamic, the IP address could change leaving the DNS configuration of our client invalid. So, I'll go to the network settings of the DC and switch the IP allocation to static:  <br/>
-<img src="https://i.imgur.com/esZllT8.png" height="80%" width="80%" alt="Setting Up in Azure"/>
+<img src="https://i.imgur.com/ayog32f.png" height="80%" width="80%" alt="Setting Up in Azure"/>
 <br />
 <br />
-<img src="https://i.imgur.com/l0PmApR.png" height="80%" width="80%" alt="Setting Up in Azure"/>
+<img src="https://i.imgur.com/zhoKIzV.png" height="80%" width="80%" alt="Setting Up in Azure"/>
 <br />
 <br />
 Next, I'll use Remote Desktop Connection to connect to the DC using its public IP and the log in credentials I created when setting up this machine:  <br/>
-<img src="https://i.imgur.com/OHCVLqt.png" height="80%" width="80%" alt="Setting Up in Azure"/>
+<img src="https://i.imgur.com/lXHs2LT.png" height="80%" width="80%" alt="Setting Up in Azure"/>
 <br />
 <br />
 Once I'm logged in, the following screen will appear with the Server Manager open. (If this isn't what you're seeing and instead it a regular windows desktop, you may have connected to the client VM instead or chose the wrong image when creating the DC):  <br/>
-<img src="https://i.imgur.com/yVeXBtz.png" height="80%" width="80%" alt="Setting Up in Azure"/>
+<img src="https://i.imgur.com/d7CnNWd.png" height="80%" width="80%" alt="Setting Up in Azure"/>
 <br />
 <br />
 Next, I'm going to disable the firewall (you probably wouldn't do this in real lfe, but for the sake of this lab where nothing is at stake, I'll go ahead and do it). So, to disable the firewall I'll right click on the "Start" button and select "Run". Then type "wf.msc":  <br/>
@@ -75,21 +59,11 @@ Next, I'm going to disable the firewall (you probably wouldn't do this in real l
 <br />
 <br />
 Click on "Windows Defender Firewall Properties" then on the, "Domain Profile", "Private Profile, and the "Public Profile" tabs, turn the firewall state off:  <br/>
-<img src="https://i.imgur.com/5luuIqk.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
-<img src="https://i.imgur.com/uZJpkGP.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
-<img src="https://i.imgur.com/3wiNDiy.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
-You should see that all the firewall settings are disable:  <br/>
-<img src="https://i.imgur.com/wnHbVDn.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
+<img src="https://i.imgur.com/Znrhxsl.png" height="80%" width="80%" alt="Setting Up in Azure"/>
+
+
 Next, I need configure our clients DNS settings to the DC. To start, back in Azure, I'll grab the DCs private IP address:  <br/>
-<img src="https://i.imgur.com/OIzMsfO.png" height="80%" width="80%" alt="Setting Up in Azure"/>
+<img src="https://i.imgur.com/dwV3nU3.png" height="80%" width="80%" alt="Setting Up in Azure"/>
 <br />
 <br />
 Then, I'll go to the network setting of the client machine. click on the NIC (Network Interface Card), go to settings, then DNS servers and switch from "Inherit from virtual network" to "Custom". Input the DCs private IP here and save:  <br/>
