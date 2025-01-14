@@ -83,7 +83,7 @@ Now that I'm logged in, I will open Powershell and attempt to ping the DC using 
 
 <h2>Active Directory Infrastructure is Now Prepared! </h2>
 
-<b>We've successfully created two VMs (Virtual Machines), one running Windows Server, to act as a Domain Controller. The other VM as a client, running Windows 10. Don't forget: In later projects I will deploy AD, run a script that will create users in the domain, which I can log into from the client VM, then manage the accounts and update the group policies, all to simulate a real life environment!  </b>
+<b>We've successfully created two VMs (Virtual Machines), one running Windows Server, to act as a Domain Controller. The other VM as a client, running Windows 10.  </b>
 <br />
 <br />
 </p>
