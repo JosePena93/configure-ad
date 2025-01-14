@@ -67,19 +67,16 @@ Next, I need configure our clients DNS settings to the DC. To start, back in Azu
 <br />
 <br />
 Then, I'll go to the network setting of the client machine. click on the NIC (Network Interface Card), go to settings, then DNS servers and switch from "Inherit from virtual network" to "Custom". Input the DCs private IP here and save:  <br/>
-<img src="https://i.imgur.com/ddrkcIQ.png" height="80%" width="80%" alt="Setting Up in Azure"/>
+<img src="https://i.imgur.com/wC4Qgcr.png" height="80%" width="80%" alt="Setting Up in Azure"/>
 <br />
 <br />
-After that's saved, I'll restart the client machine:  <br/>
-<img src="https://i.imgur.com/2C3Qi1q.png" height="80%" width="80%" alt="Setting Up in Azure"/>
+After that's saved, I'll restart the client machine. Once the machine is restarted, ill use remote desktop to connect to the client machine using its public IP and the login credentials i created during its set up.:  <br/>
+<img src="https://i.imgur.com/v7E1lXn.png" height="80%" width="80%" alt="Setting Up in Azure"/>
 <br />
 <br />
-Once the machine as restarted, I'll use Remote Desktop connection to connect to the client machine using its public IP and the log in credentials I created while setting up this machine:  <br/>
-<img src="https://i.imgur.com/ZgpSqPf.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
+
 Now that I'm logged in, I will open Powershell and attempt to ping the DC using the ping command and its private IP address. In my case it'll look like this. (If there is an error and the connection timed out, double check in Azure to make sure both of the machines are on the same virtual network. If they aren't this is likely causing the error and you'll need to set up the machine again on the same network):  <br/>
-<img src="https://i.imgur.com/5bEWedc.png" height="80%" width="80%" alt="Setting Up in Azure"/>
+<img src="https://i.imgur.com/EPWF487.png" height="80%" width="80%" alt="Setting Up in Azure"/>
 <br />
 <br />
 While I'm here I can double check that the DNS server settings are pointing to the DC. I'll run "ipconfig /all" and look for the "DNS Servers" and it should point to our DC if everything is set up properly:  <br/>
