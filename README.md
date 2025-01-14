@@ -79,10 +79,7 @@ Now that I'm logged in, I will open Powershell and attempt to ping the DC using 
 <img src="https://i.imgur.com/EPWF487.png" height="80%" width="80%" alt="Setting Up in Azure"/>
 <br />
 <br />
-While I'm here I can double check that the DNS server settings are pointing to the DC. I'll run "ipconfig /all" and look for the "DNS Servers" and it should point to our DC if everything is set up properly:  <br/>
-<img src="https://i.imgur.com/dgShrBB.png" height="80%" width="80%" alt="Setting Up in Azure"/>
-<br />
-<br />
+
 
 <h2>Active Directory Infrastructure is Now Prepared! </h2>
 
